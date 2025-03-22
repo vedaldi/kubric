@@ -36,6 +36,10 @@ import tensorflow as tf
 logger = logging.getLogger(__name__)
 
 
+def _convert_specular_tint_291_to_400(value):
+  """Blender 4.0.0's specular tint is RGBA, not float."""
+  return (value, value, value, 1.0)
+
 def add_top_level_empty_parent(name: str = "Empty") -> bpy.types.Object:
   """Adds an empty parent to scene and makes it the parent of all objects.
 
@@ -622,6 +626,9 @@ class Blender(core.View):
     mat.use_nodes = True
     bsdf_node = mat.node_tree.nodes["Principled BSDF"]
 
+    # For correspondence between Blender 2.92 and 4.0 see:
+    # https://github.com/blender/blender/blob/3e5de94c8ee70734b1bc66547a4726601c50f37f/source/blender/blenloader/intern/versioning_400.cc
+
     obj.observe(AttributeSetter(bsdf_node.inputs["Base Color"], "default_value"), "color")
     obj.observe(KeyframeSetter(bsdf_node.inputs["Base Color"], "default_value"), "color",
                 type="keyframe")
@@ -631,26 +638,51 @@ class Blender(core.View):
     obj.observe(AttributeSetter(bsdf_node.inputs["Metallic"], "default_value"), "metallic")
     obj.observe(KeyframeSetter(bsdf_node.inputs["Metallic"], "default_value"), "metallic",
                 type="keyframe")
-    obj.observe(AttributeSetter(bsdf_node.inputs["Specular"], "default_value"), "specular")
-    obj.observe(KeyframeSetter(bsdf_node.inputs["Specular"], "default_value"), "specular",
-                type="keyframe")
+
+    if bpy.app.version < (4, 0, 0):
+      obj.observe(AttributeSetter(bsdf_node.inputs["Specular"], "default_value"), "specular")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Specular"], "default_value"), "specular",
+                  type="keyframe")
+    else:
+      obj.observe(AttributeSetter(bsdf_node.inputs["Specular IOR Level"], "default_value"), "specular")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Specular IOR Level"], "default_value"), "specular",
+                  type="keyframe")
+
     obj.observe(AttributeSetter(bsdf_node.inputs["Specular Tint"],
-                                "default_value"), "specular_tint")
+                                "default_value", _convert_specular_tint_291_to_400), "specular_tint")
     obj.observe(KeyframeSetter(bsdf_node.inputs["Specular Tint"], "default_value"), "specular_tint",
                 type="keyframe")
+
     obj.observe(AttributeSetter(bsdf_node.inputs["IOR"], "default_value"), "ior")
     obj.observe(KeyframeSetter(bsdf_node.inputs["IOR"], "default_value"), "ior",
                 type="keyframe")
-    obj.observe(AttributeSetter(bsdf_node.inputs["Transmission"], "default_value"), "transmission")
-    obj.observe(KeyframeSetter(bsdf_node.inputs["Transmission"], "default_value"), "transmission",
-                type="keyframe")
-    obj.observe(AttributeSetter(bsdf_node.inputs["Transmission Roughness"], "default_value"),
-                "transmission_roughness")
-    obj.observe(KeyframeSetter(bsdf_node.inputs["Transmission Roughness"], "default_value"),
-                "transmission_roughness", type="keyframe")
-    obj.observe(AttributeSetter(bsdf_node.inputs["Emission"], "default_value"), "emission")
-    obj.observe(KeyframeSetter(bsdf_node.inputs["Emission"], "default_value"), "emission",
-                type="keyframe")
+
+    if bpy.app.version < (4, 0, 0):
+      obj.observe(AttributeSetter(bsdf_node.inputs["Transmission"], "default_value"), "transmission")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Transmission"], "default_value"), "transmission",
+                  type="keyframe")
+    else:
+      obj.observe(AttributeSetter(bsdf_node.inputs["Transmission Weight"], "default_value"), "transmission")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Transmission Weight"], "default_value"), "transmission",
+                  type="keyframe")
+
+    if bpy.app.version < (4, 0, 0):
+      obj.observe(AttributeSetter(bsdf_node.inputs["Transmission Roughness"], "default_value"),
+                  "transmission_roughness")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Transmission Roughness"], "default_value"),
+                  "transmission_roughness", type="keyframe")
+    else:
+      # There is no equivalent
+      pass
+
+    if bpy.app.version < (4, 0, 0):
+      obj.observe(AttributeSetter(bsdf_node.inputs["Emission"], "default_value"), "emission")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Emission"], "default_value"), "emission",
+                  type="keyframe")
+    else:
+      obj.observe(AttributeSetter(bsdf_node.inputs["Emission Color"], "default_value"), "emission")
+      obj.observe(KeyframeSetter(bsdf_node.inputs["Emission Color"], "default_value"), "emission",
+                  type="keyframe")
     return mat
 
   @add_asset.register(core.FlatMaterial)
