@@ -1,0 +1,62 @@
+{
+  "configurations": [
+    {
+      "name": "av_test @ FB",
+      "type": "fb-python",
+      "request": "launch",
+      "python": "/home/vedaldi/.conda/envs/kubric/bin/python",
+      "cwd": "${workspaceFolder}",
+      "program": "av_test.py",
+      "console": "integratedTerminal",
+      "env": {},
+      "justMyCode": false,
+      "args": []
+    },
+    {
+      "name": "examples @ FB",
+      "type": "fb-python",
+      "request": "launch",
+      "python": "/home/vedaldi/.conda/envs/kubric/bin/python",
+      "cwd": "${workspaceFolder}",
+      // "program": "examples/helloworld.py",
+      // "program": "examples/animation.py",
+      "program": "examples/bouncing_balls.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": false,
+      "args": []
+    },
+    {
+      "name": "av_test",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "/Users/vedaldi/brew/Caskroom/miniconda/base/envs/kubric/bin/python",
+      "cwd": "${workspaceFolder}",
+      "program": "av_test.py",
+      "console": "integratedTerminal",
+      "env": {},
+      "justMyCode": false,
+      "args": []
+    },
+    {
+      "name": "examples",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "/Users/vedaldi/brew/Caskroom/miniconda/base/envs/kubric/bin/python",
+      "cwd": "${workspaceFolder}",
+      // "program": "examples/helloworld.py",
+      // "program": "examples/animation.py",
+      // "program": "examples/bouncing_balls.py",
+      // "program": "examples/basic.py",
+      "program": "examples/simulator.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": false,
+      "args": []
+    }
+  ]
+}
