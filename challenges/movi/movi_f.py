@@ -375,7 +375,8 @@ def load_scene_directory(scene_dir, target_size, layers=DEFAULT_LAYERS):
           "height": target_size[0],
           "num_frames": num_frames,
           "num_instances": metadata["metadata"]["num_instances"],
-          "motion_blur": metadata["metadata"]["motion_blur"]
+          # "motion_blur": metadata["metadata"]["motion_blur"]
+          "motion_blur": 0
       },
       "background": metadata["metadata"]["background"],
       "instances": [format_instance_information(obj)
@@ -384,7 +385,7 @@ def load_scene_directory(scene_dir, target_size, layers=DEFAULT_LAYERS):
       "events": format_events_information(events),
   }
 
-  resolution = metadata["metadata"]["height"], metadata["metadata"]["width"]
+  resolution = metadata["metadata"]["resolution"]
 
   assert resolution[1] / target_size[0] == resolution[0] / target_size[1]
   scale = resolution[1] / target_size[0]

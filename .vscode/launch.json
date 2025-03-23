@@ -79,7 +79,7 @@
         "--save_state",
         "--min_num_dynamic_objects", "0",
         "--max_num_dynamic_objects", "10",
-        "--output_dir", "./generated_data"
+        "--output_dir", "./generated_data/0001"
       ]
     },
     {

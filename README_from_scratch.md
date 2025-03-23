@@ -15,6 +15,7 @@ pip install tensorflow tensorflow-datasets tensorflow-graphics
 pip install mediapy
 pip install --no-cache-dir bpy
 pip install apache-beam
+pip install -U Pillow
 ```
 
 To remove the environment and start from scratch, use:
