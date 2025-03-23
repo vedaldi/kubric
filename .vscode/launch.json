@@ -67,7 +67,8 @@
       "program": "./challenges/movi/movi_def_worker_long.py",
       "console": "integratedTerminal",
       "env": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}",
+        "KUBRIC_USE_GPU": "1",
       },
       "justMyCode": false,
       "args": [
@@ -75,6 +76,7 @@
         "--camera", "linear_movement",
         "--max_camera_movement", "8",
         "--randomize_focal_length",
+        "--save_state",
         "--min_num_dynamic_objects", "0",
         "--max_num_dynamic_objects", "10",
         "--output_dir", "./generated_data"
