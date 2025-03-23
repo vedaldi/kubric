@@ -57,6 +57,28 @@
       },
       "justMyCode": false,
       "args": []
+    },
+    {
+      "name": "movi_def_worker_long",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "/Users/vedaldi/brew/Caskroom/miniconda/base/envs/kubric/bin/python",
+      "cwd": "${workspaceFolder}",
+      "program": "./challenges/movi/movi_def_worker_long.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": false,
+      "args": [
+        "--max_motion_blur", "2.0",
+        "--camera", "linear_movement",
+        "--max_camera_movement", "8",
+        "--randomize_focal_length",
+        "--min_num_dynamic_objects", "0",
+        "--max_num_dynamic_objects", "10",
+        "--output_dir", "./generated_data"
+      ]
     }
   ]
 }
