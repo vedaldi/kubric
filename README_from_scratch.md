@@ -8,8 +8,9 @@ CONDA_ENV_NAME=kubric
 conda create -y --name ${CONDA_ENV_NAME} python=3.11
 conda activate ${CONDA_ENV_NAME}
 conda install -y 'numpy<2.0.0' matplotlib scikit-learn absl-py imageio pypng traitlets importlib_resources munch
-conda install -y -c conda-forge etils pyquaternion openexr trimesh  
+conda install -y -c conda-forge pyquaternion openexr trimesh pybullet
 pip install OpenEXR
+pip install 'etils[epath_no_tf]'
 pip install tensorflow tensorflow-datasets tensorflow-graphics
 pip install mediapy
 pip install --no-cache-dir bpy
