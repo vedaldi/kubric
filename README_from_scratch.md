@@ -7,7 +7,8 @@ To install the environment using Conda, do this:
 CONDA_ENV_NAME=kubric
 conda create -y --name ${CONDA_ENV_NAME} python=3.11
 conda activate ${CONDA_ENV_NAME}
-conda install -y -c conda-forge absl-py etils imageio importlib_resources munch 'numpy<2.0.0' pypng pyquaternion tensorflow traitlets openexr scikit-learn trimesh apache-beam
+conda install -y -c conda-forge absl-py etils imageio importlib_resources munch 'numpy<2.0.0' pypng \
+  pyquaternion tensorflow traitlets openexr scikit-learn trimesh apache-beam
 pip install --no-cache-dir OpenEXR bpy
 ```
 
