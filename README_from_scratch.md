@@ -35,3 +35,9 @@ To test it
 ```bash
 python kubric/examples/helloworld.py
 ```
+
+Download all the assets locally using `gsutil` in a subdirectory `assets`:
+
+```bash
+with-proxy gsutil rsync -r gs://kubric-public/assets/ assets/
+```

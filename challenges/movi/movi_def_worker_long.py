@@ -21,6 +21,7 @@ import bpy
 import kubric as kb
 from kubric.simulator import PyBullet
 from kubric.renderer import Blender
+import kubric.file_io
 import numpy as np
 
 
@@ -103,6 +104,10 @@ renderer = Blender(
 kubasic = kb.AssetSource.from_manifest(FLAGS.kubasic_assets)
 gso = kb.AssetSource.from_manifest(FLAGS.gso_assets)
 hdri_source = kb.AssetSource.from_manifest(FLAGS.hdri_assets)
+
+kubasic.data_dir = kubric.file_io.as_path(FLAGS.kubasic_assets).parent
+gso.data_dir = kubric.file_io.as_path(FLAGS.gso_assets).parent
+hdri_source.data_dir = kubric.file_io.as_path(FLAGS.hdri_assets).parent
 
 
 # --- Populate the scene

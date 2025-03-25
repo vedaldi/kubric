@@ -18,3 +18,4 @@ Dockerfile
 output_tmp/*
 generated_data
 output_track_data
+assets/
