@@ -1097,9 +1097,14 @@ def plot_tracks(rgb, points, occluded, trackgroup=None):
     plt.margins(0, 0)
     fig.canvas.draw()
     width, height = fig.get_size_inches() * fig.get_dpi()
-    img = np.frombuffer(
-        fig.canvas.tostring_rgb(),
-        dtype='uint8').reshape(int(height), int(width), 3)
+    if hasattr(fig.canvas, "tostring_rgb"):
+      img = np.frombuffer(
+          fig.canvas.tostring_rgb(),
+          dtype='uint8').reshape(int(height), int(width), 3)
+    else:
+      img = np.frombuffer(
+          fig.canvas.buffer_rgba().tobytes(),
+          dtype='uint8').reshape(int(height), int(width), 4)[:, :, :3]
     disp.append(np.copy(img))
     plt.close(fig)
 

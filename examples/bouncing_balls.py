@@ -36,7 +36,7 @@ parser.add_argument("--friction", type=float, default=.0)
 parser.add_argument("--shape", type=str, default="sphere")
 parser.add_argument("--color", type=str, default="uniform_hsv")
 
-parser.set_defaults(frame_end=24, frame_rate=12, width=128, height=128)
+parser.set_defaults(frame_end=24, frame_rate=12, resolution="128x128")
 FLAGS = parser.parse_args()
 
 # --- Common setups & resources
