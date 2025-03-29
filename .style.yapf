@@ -1,0 +1,8 @@
+[style]
+based_on_style = google
+column_limit = 80
+continuation_align_style = SPACE
+indent_width = 2
+join_multiple_lines = True
+SPLIT_ALL_COMMA_SEPARATED_VALUES = False
+CONTINUATION_INDENT_WIDTH = 2
