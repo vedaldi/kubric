@@ -597,7 +597,7 @@ def as_path(path: PathLike) -> epath.Path:
   Instead of pathlib.Paths, we use the TFDS path because they transparently
   support paths to GCS buckets such as "gs://kubric-public/GSO".
   """
-  return tfds.core.as_path(path)
+  return epath.Path(path)
 
 
 def read_png(filename, rescale_range=None) -> np.ndarray:
